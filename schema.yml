@@ -11,7 +11,6 @@ paths:
       - api
       security:
       - jwtAuth: []
-      - {}
       responses:
         '200':
           content:
@@ -39,7 +38,6 @@ paths:
         required: true
       security:
       - jwtAuth: []
-      - {}
       responses:
         '201':
           content:
@@ -60,7 +58,6 @@ paths:
       - api
       security:
       - jwtAuth: []
-      - {}
       responses:
         '200':
           content:
@@ -92,7 +89,6 @@ paths:
         required: true
       security:
       - jwtAuth: []
-      - {}
       responses:
         '200':
           content:
@@ -123,7 +119,6 @@ paths:
               $ref: '#/components/schemas/PatchedHotel'
       security:
       - jwtAuth: []
-      - {}
       responses:
         '200':
           content:
@@ -143,10 +138,118 @@ paths:
       - api
       security:
       - jwtAuth: []
-      - {}
       responses:
         '204':
           description: No response body
+  /api/hotels/{id}/feedbacks/:
+    get:
+      operationId: api_hotels_feedbacks_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Feedback'
+          description: ''
+    post:
+      operationId: api_hotels_feedbacks_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Feedback'
+        required: true
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Feedback'
+          description: ''
+  /api/hotels/{id}/rooms/:
+    get:
+      operationId: api_hotels_rooms_list
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+          description: ''
+    post:
+      operationId: api_hotels_rooms_create
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Room'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Room'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
   /api/login/:
     post:
       operationId: api_login_create
@@ -174,6 +277,282 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenObtainPair'
           description: ''
+  /api/reservations/:
+    get:
+      operationId: api_reservations_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reservations_users_rooms_'
+          description: ''
+    post:
+      operationId: api_reservations_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservations_users_rooms_'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reservations_users_rooms_'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reservations_users_rooms_'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservations_users_rooms_'
+          description: ''
+  /api/reservations/{id}/:
+    get:
+      operationId: api_reservations_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservations_users_rooms_'
+          description: ''
+    put:
+      operationId: api_reservations_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reservations_users_rooms_'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Reservations_users_rooms_'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Reservations_users_rooms_'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservations_users_rooms_'
+          description: ''
+    patch:
+      operationId: api_reservations_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedReservations_users_rooms_'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedReservations_users_rooms_'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedReservations_users_rooms_'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reservations_users_rooms_'
+          description: ''
+    delete:
+      operationId: api_reservations_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/rooms/:
+    get:
+      operationId: api_rooms_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Room'
+          description: ''
+    post:
+      operationId: api_rooms_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Room'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Room'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+  /api/rooms/{id}/:
+    get:
+      operationId: api_rooms_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+    put:
+      operationId: api_rooms_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Room'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Room'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+    patch:
+      operationId: api_rooms_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedRoom'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedRoom'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedRoom'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Room'
+          description: ''
+    delete:
+      operationId: api_rooms_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/users/:
     get:
       operationId: api_users_list
@@ -324,6 +703,8 @@ components:
           maxLength: 255
         number:
           type: integer
+          maximum: 2147483647
+          minimum: -2147483648
         city:
           type: string
           maxLength: 255
@@ -336,34 +717,212 @@ components:
       - id
       - number
       - street
+    Feedback:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        rating:
+          $ref: '#/components/schemas/RatingEnum'
+        description:
+          type: string
+          nullable: true
+          maxLength: 256
+        owner:
+          type: string
+          format: uuid
+          readOnly: true
+      required:
+      - id
+      - owner
+      - rating
     Hotel:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        owner:
+        name:
           type: string
-          format: uuid
+          maxLength: 100
+        owner:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
           readOnly: true
         address:
           $ref: '#/components/schemas/Address'
+        feedbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feedback'
+          readOnly: true
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
       required:
       - address
+      - feedbacks
       - id
+      - name
       - owner
+      - rooms
+    Nested:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        last_login:
+          type: string
+          format: date-time
+          nullable: true
+        is_superuser:
+          type: boolean
+          title: Superuser status
+          description: Designates that this user has all permissions without explicitly
+            assigning them.
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        is_staff:
+          type: boolean
+          title: Staff status
+          description: Designates whether the user can log into this admin site.
+        is_active:
+          type: boolean
+          title: Active
+          description: Designates whether this user should be treated as active. Unselect
+            this instead of deleting accounts.
+        date_joined:
+          type: string
+          format: date-time
+        password:
+          type: string
+          maxLength: 100
+        email:
+          type: string
+          format: email
+          maxLength: 100
+        first_name:
+          type: string
+          maxLength: 50
+        last_name:
+          type: string
+          maxLength: 50
+        is_legal:
+          type: boolean
+          nullable: true
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        updated_at:
+          type: string
+          format: date-time
+          readOnly: true
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        user_permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        reservations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+      - created_at
+      - email
+      - first_name
+      - groups
+      - id
+      - last_name
+      - password
+      - reservations
+      - updated_at
+      - user_permissions
+      - username
     PatchedHotel:
       type: object
       properties:
         id:
           type: integer
           readOnly: true
-        owner:
+        name:
           type: string
-          format: uuid
+          maxLength: 100
+        owner:
+          allOf:
+          - $ref: '#/components/schemas/Nested'
           readOnly: true
         address:
           $ref: '#/components/schemas/Address'
+        feedbacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feedback'
+          readOnly: true
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+    PatchedReservations_users_rooms_:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+        room:
+          allOf:
+          - $ref: '#/components/schemas/Room'
+          readOnly: true
+        checkin_date:
+          type: string
+          format: date
+        checkout_date:
+          type: string
+          format: date
+    PatchedRoom:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: integer
+        beds:
+          type: integer
+        ranking:
+          type: string
+          maxLength: 255
+        hotel:
+          allOf:
+          - $ref: '#/components/schemas/Hotel'
+          readOnly: true
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+        unavailable_days:
+          type: string
+          readOnly: true
     PatchedUser:
       type: object
       properties:
@@ -414,6 +973,85 @@ components:
           type: string
           format: date-time
           readOnly: true
+    RatingEnum:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      type: integer
+    Reservations_users_rooms_:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/User'
+          readOnly: true
+        room:
+          allOf:
+          - $ref: '#/components/schemas/Room'
+          readOnly: true
+        checkin_date:
+          type: string
+          format: date
+        checkout_date:
+          type: string
+          format: date
+      required:
+      - checkin_date
+      - checkout_date
+      - id
+      - room
+      - user
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        number:
+          type: integer
+        beds:
+          type: integer
+        ranking:
+          type: string
+          maxLength: 255
+        hotel:
+          allOf:
+          - $ref: '#/components/schemas/Hotel'
+          readOnly: true
+        services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+        unavailable_days:
+          type: string
+          readOnly: true
+      required:
+      - beds
+      - hotel
+      - id
+      - number
+      - ranking
+      - services
+      - unavailable_days
+    Service:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+      required:
+      - id
+      - name
     TokenObtainPair:
       type: object
       properties:
